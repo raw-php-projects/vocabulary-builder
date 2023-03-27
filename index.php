@@ -1,3 +1,7 @@
+<?php 
+    require_once "functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,15 +27,21 @@
                 <a href="#" id="login">Login</a> | <a href="#" id="register">Register Account</a>
             </div>
             <div class="formc">
-                <form id="form01" method="post" action="tasks.php">
-                    <h3>Login</h3>
+                <form id="form01" method="post" action="user-register.php">
+                    <h3>Register</h3>
+                    <?php 
+                        $error = $_GET['status'] ?? '';
+                        if( $error ){
+                            echo "<p>{$status[$error]}</p>";
+                        }
+                    ?>
                     <fieldset>
                         <label for="email">Email</label>
                         <input type="text" placeholder="Email Address" id="email" name="email">
                         <label for="password">Password</label>
                         <input type="password" placeholder="Password" id="password" name="password">
                         <input class="button-primary" type="submit" value="Submit">
-                        <input type="hidden" name="action" id="action" value="login">
+                        <input type="hidden" name="action" id="action" value="register">
                     </fieldset>
                 </form>
             </div>
