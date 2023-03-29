@@ -1,3 +1,14 @@
+<?php 
+    session_start();    
+    require_once "functions.php";
+
+    // Check if user logged out
+    
+    $user_id = $_SESSION['id'] ?? 0;
+    if( ! $user_id ){
+        redirect('index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +60,6 @@
                 </form>
             </div>
             </div>
-        </div>
         <hr>
 
         <table class="words" >

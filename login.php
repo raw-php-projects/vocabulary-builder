@@ -1,19 +1,12 @@
 <?php 
-    session_start();
     require_once "functions.php";
-
-    // Check if user logged in
-    $user_id = $_SESSION['id'] ?? 0;
-    if( $user_id ){
-        redirect('words.php');
-    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vocabulary Builder</title>
+    <title>Login | Vocabulary Builder</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
@@ -31,11 +24,11 @@
     <div class="row navigation">
         <div class="column column-60 column-offset-20">
             <div class="formaction">
-                <a href="login.php" id="login">Login</a> | <a class="active" href="index.php" id="register">Register Account</a>
+                <a href="login.php" class="active" id="login">Login</a> | <a href="index.php" id="register">Register Account</a>
             </div>
             <div class="formc">
                 <form id="form01" method="post" action="user-register.php">
-                    <h3>Register</h3>
+                    <h3>Login</h3>
                     <?php 
                         $error = $_GET['status'] ?? '';
                         if( $error ){
@@ -47,8 +40,8 @@
                         <input type="text" placeholder="Email Address" id="email" name="email">
                         <label for="password">Password</label>
                         <input type="password" placeholder="Password" id="password" name="password">
-                        <input class="button-primary" type="submit" value="Register">
-                        <input type="hidden" name="action" id="action" value="register">
+                        <input class="button-primary" type="submit" value="Login">
+                        <input type="hidden" name="action" id="action" value="login">
                     </fieldset>
                 </form>
             </div>
