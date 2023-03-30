@@ -58,5 +58,4 @@
 </div>
 </body>
 <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="assets/js/script.js"></script>
 </html>

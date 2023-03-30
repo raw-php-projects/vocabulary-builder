@@ -59,12 +59,16 @@ body.voc #main {
   width: 300px;
 }
 
+form,
+fieldset {
+  margin: 0;
+}
 body.voc .formc {
-  margin-top: 80px;
+  margin-top: 30px;
 }
 
 .wordsc {
-  margin-top: 80px;
+  margin-top: 20px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
@@ -72,6 +76,9 @@ body.voc .formc {
 
 .words {
   margin-top: 20px;
+}
+div#words {
+  margin-bottom: 50px;
 }
 
 tr.alt {

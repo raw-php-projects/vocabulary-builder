@@ -2,8 +2,7 @@
     session_start();    
     require_once "functions.php";
 
-    // Check if user logged out
-    
+    // Check if user logged out    
     $user_id = $_SESSION['id'] ?? 0;
     if( ! $user_id ){
         redirect('index.php');
@@ -17,17 +16,14 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="voc">
 <div class="sidebar">
-    <h4>Menu</h4>
+    <h4><?php echo getUserEmail($user_id); ?></h4>
     <ul class="menu">
-        <li><a href="words.php" class="menu-item" data-target="words">All Words</a></li>
-        <li><a href="#" class="menu-item" data-target="wordform">Add New Word</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
 </div>
@@ -36,6 +32,27 @@
     <h1 class="maintitle">
         <i class="fas fa-language"></i> <br/>My Vocabularies
     </h1>
+
+    <div class="formc helement" id="wordform">
+        <form action="add-words.php" method="post">
+            <h4>Add New Word</h4>
+            <?php 
+                $error = $_GET['status'] ?? '';
+                if( $error ){
+                    echo "<p>{$status[$error]}</p>";
+                }
+            ?>
+            <fieldset>
+                <label for="word">Word</label>
+                <input type="text" name="word" placeholder="Word" id="word" value="">
+                <label for="Meaning">Meaning</label>
+                <textarea name="meaning" placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
+                <input type="hidden" name="action" value="add-word">
+                <input class="button-primary" type="submit" value="Add Word">
+            </fieldset>
+        </form>
+    </div>
+
     <div class="wordsc helement" id="words">
         <div class="row">
             <div class="column column-50">
@@ -70,42 +87,22 @@
             </tr>
             </thead>
             <tbody>
+                <?php 
+                    $words = getWordsByUserId($user_id);
+                    $countWords = count($words);
+                    if( $countWords > 0 ){
+                        for( $i = 0; $i < $countWords; $i++ ){
+                ?>
 			    <tr>
-                    <td>Random</td>
-                    <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, ut?</td>
+                    <td><?php echo $words[$i]['word']; ?></td>
+                    <td><?php echo $words[$i]['meaning']; ?></td>
                 </tr>
-			    <tr>
-                    <td>Random</td>
-                    <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, ut?</td>
-                </tr>
-			    <tr>
-                    <td>Random</td>
-                    <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, ut?</td>
-                </tr>
-			    <tr>
-                    <td>Random</td>
-                    <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, ut?</td>
-                </tr>
+                <?php } } ?>
             </tbody>
         </table>
-    </div>
-
-    <div class="formc helement" id="wordform" style="display: none;">
-        <form action="tasks.php" method="post">
-            <h4>Add New Word</h4>
-            <fieldset>
-                <label for="word">Word</label>
-                <input type="text" name="word" placeholder="Word" id="word">
-                <label for="Meaning">Meaning</label>
-                <textarea name="meaning" placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
-                <input type="hidden" name="action" value="addword">
-                <input class="button-primary" type="submit" value="Add Word">
-            </fieldset>
-        </form>
     </div>
 
 </div>
 </body>
 <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="assets/js/script.js?1"></script>
 </html>
